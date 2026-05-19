@@ -2,7 +2,8 @@
 from sqlalchemy import create_engine
 from etl.common.config import (
     POSTGRES_CONFIG,
-    REALTIME_TABLE_NAME
+    REALTIME_TABLE_NAME,
+    HEADWAY_TABLE_NAME
 )
 
 DATABASE_URL = (
@@ -25,4 +26,14 @@ def save_data(df):
         index=False 
     )
 
-    print("DB 저장 완료")
+
+
+# 지하철 배차 분석 결과 저장
+def save_headway_data(df):
+
+    df.to_sql(
+        name=HEADWAY_TABLE_NAME,
+        con=engine,
+        if_exists="append",
+        index=False
+    )
