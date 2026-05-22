@@ -1,5 +1,16 @@
 venv/
 __pycache__/
 *.pyc
+
 .env
+
+logs/
+airflow/logs/
+
+airflow.cfg
+airflow.db
+
+.idea/
+.vscode/
+
 .DS_Store
