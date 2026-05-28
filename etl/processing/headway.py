@@ -23,3 +23,12 @@ def  calculate_headway(df):
     ).dt.total_seconds()
 
     return df
+
+# 혼잡도 계산, 배차 간격 분석, 지연 분석
+# def calculate_congestion(df):
+#     df['TOTAL_PASSENGERS'] = (
+#         df['GTON_TNOPE'] + 
+#         df['GTOFF_TNOPE']
+#     )
+
+#     return df

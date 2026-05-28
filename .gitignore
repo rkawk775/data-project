@@ -1,15 +1,18 @@
+# Python
 venv/
 __pycache__/
 *.pyc
 
+# Environment
 .env
 
+# Airflow
 logs/
 airflow/logs/
-
 airflow.cfg
 airflow.db
 
+# IDE
 .idea/
 .vscode/
 

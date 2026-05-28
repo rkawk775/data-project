@@ -26,8 +26,8 @@ default_args = {
 with DAG(
     dag_id = "subway_realtime_etl",
     default_args = default_args,
-    start_data = datetime(2026,5,22),
-    schedule="@minute",
+    start_date = datetime(2026,5,22),
+    schedule="* * * * *",
     catchup=False
 ) as dag:
     

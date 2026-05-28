@@ -1,4 +1,5 @@
 # transform.py : 컬럼 정리, 데이터 가공 (Transform)
+import pandas as pd
 
 def transform_train_data(df):
 
@@ -18,3 +19,13 @@ def transform_train_data(df):
     ]
 
     return selected_df
+
+def transform_subway_data(data):
+    rows = data['CardSubwayStatsNew']['row']
+
+    df = pd.DataFrame(rows)
+
+    df['GTON_TNOPE'] = df['GTON_TNOPE'].astype(int)
+    df['GTOFF_TNOPE'] = df['GTOFF_TNOPE'].astype(int)
+
+    return df
