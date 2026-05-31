@@ -1,13 +1,11 @@
-# subway_api.py : API 호출 (Extract)
+# 실시간 열차 위치 정보
 import requests
 import pandas as pd
 from etl.common.config import(
     LOCATION_API_KEY, 
     BASE_URL, 
-    TARGET_LINE,
-    PASSENGER_API_KEY
+    TARGET_LINE
 )
-
 
 
 def fetch_realtime_train_data():
@@ -19,16 +17,3 @@ def fetch_realtime_train_data():
     df = pd.DataFrame(realtime_data)
     
     return df
-
-def fetch_subway_data(date: str):
-    url = (
-        f"http://openapi.seoul.go.kr:8088/"
-        f"{PASSENGER_API_KEY}/json/"
-        f"CardSubwayStatsNew/1/100/{date}/"
-    )
-
-    response = requests.get(url)
-
-    data = response.json()
-
-    return data

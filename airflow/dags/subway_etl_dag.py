@@ -2,8 +2,8 @@
 from datetime import datetime
 from airflow import DAG
 from airflow.operators.python import PythonOperator
-from etl.ingestion.subway_api import fetch_realtime_train_data
-from etl.processing.transform import transform_train_data
+from etl.ingestion.subway_passenger_api import fetch_realtime_train_data
+from etl.processing.passenger_transform import transform_train_data
 from etl.processing.headway import calculate_headway
 from etl.storage.postgres import (
     save_data,

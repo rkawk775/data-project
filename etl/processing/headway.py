@@ -22,6 +22,16 @@ def  calculate_headway(df):
         df["recptnDt"] - df["previous_time"]
     ).dt.total_seconds()
 
+    # 간단 혼잡 정수
+    df['CONGESTION_SCORE'] =(
+        df['TOTAL_PASSENGERS'] / 1000
+    )
+
+    # 환승 병목 점수
+    df['TRANSFER_SCORE'] = (
+        df['GTON_TNOPE'] * df['GTOFF_TNOPE']
+    )
+
     return df
 
 # 혼잡도 계산, 배차 간격 분석, 지연 분석
