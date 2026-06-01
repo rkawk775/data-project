@@ -16,3 +16,15 @@ def calculate_passenger_congestion(df):
         labels = ["LOW","MID","HIGH","VERY_HIGH"]
     )
     return df
+
+
+def get_top10_stations(df):
+    # 인구 혼잡 역 TOP10 추출
+    top10 = (
+        df.sort_values(
+            by="TOTAL_PASSENGERS",
+            ascending=False
+        )
+        .head(10)
+    )
+    return top10
