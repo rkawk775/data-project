@@ -2,7 +2,8 @@
 from etl.common.logger import logger
 from etl.ingestion import (
     fetch_realtime_train_data,
-    fetch_subway_data
+    fetch_subway_data,
+    fetch_congestion_data
 )
 from etl.processing import (
     transform_train_data,
@@ -32,16 +33,17 @@ df = calculate_passenger_congestion(df)
 # 5. 저장
 # save_subway_csv(df,"subway_congestion.csv")
 # save_subway_postgres(df)
-print(
-    get_top10_stations(df)[
-        [
-            "SBWY_ROUT_LN_NM",
-            "SBWY_STNS_NM",
-            "TOTAL_PASSENGERS",
-            "CONGESTION_LEVEL"
-        ]
-    ]
-)
-print(df["SBWY_ROUT_LN_NM"].value_counts())
+# print(
+#     get_top10_stations(df)[
+#         [
+#             "SBWY_ROUT_LN_NM",
+#             "SBWY_STNS_NM",
+#             "TOTAL_PASSENGERS",
+#             "CONGESTION_LEVEL"
+#         ]
+#     ]
+# )
+# print(df["SBWY_ROUT_LN_NM"].value_counts())
 
 
+raw_data = fetch_congestion_data()

@@ -5,3 +5,7 @@ from .subway_passenger_api import (
 from .realtime_train_api import (
     fetch_realtime_train_data
 )
+
+from .congestion_api import(
+    fetch_congestion_data
+)

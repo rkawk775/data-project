@@ -15,5 +15,5 @@ def fetch_realtime_train_data():
     data = response.json()
     realtime_data = data["realtimePositionList"]
     df = pd.DataFrame(realtime_data)
-    
+
     return df
