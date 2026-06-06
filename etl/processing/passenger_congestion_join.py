@@ -1,6 +1,7 @@
 # 승하차 데이터와 혼잡도 데이터를 join하는 파일
 import pandas as pd
 
+# 승하차 데이터와 혼잡도 데이터 join
 def join_passenger_congestion(passenger_df, congestion_df):
     merged_df = pd.merge(
         passenger_df,
@@ -12,3 +13,15 @@ def join_passenger_congestion(passenger_df, congestion_df):
     return merged_df
 
 # 혼잡도 최대값 컬럼 생성
+def add_max_congestion(df):
+    time_cols = [
+        col
+        for col in df.columns
+        if col.startswith("TIME")
+    ]
+
+    df["MAX_CONGESTION"] = (
+        df[time_cols].max(axis=1)
+    )
+
+    return df

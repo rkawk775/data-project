@@ -7,9 +7,14 @@ def analyze_bottleneck(df):
         df["MAX_CONGESTION"]
     )
 
+    return df
+
+
+def get_top10_bottleneck(df):
     return (
         df.sort_values(
             by="BOTTLENECK_SCORE",
             ascending=False
         )
+        .head(10)
     )
