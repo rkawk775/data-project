@@ -6,6 +6,15 @@ def transform_subway_data(df):
     df = df[
         df["SBWY_ROUT_LN_NM"] == TARGET_LINE
     ].copy()
+
+
+    # 데이터 품질 관리 
+    df["SBWY_STNS_NM"] = (
+        df["SBWY_STNS_NM"].replace({
+            "청량리(서울시립대입구)": "청량리"
+        })
+    )
+
     
     # 숫자형 변환
     df['GTON_TNOPE'] = df['GTON_TNOPE'].astype(int)
