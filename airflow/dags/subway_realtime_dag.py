@@ -4,9 +4,35 @@
 from datetime import datetime
 from airflow import DAG
 from airflow.operators.python import PythonOperator
+from etl.ingestion import fetch_realtime_train_data
+from etl.processing import (
+    transform_train_data,
+    calculate_headway
+)
+from etl.storage import (
+    save_data,
+    save_headway_data
+)
+
 
 def run_realtime_etl():
-    print("Realtime ETL Start")
+    
+    # 1. API 수집
+    df = fetch_realtime_train_data()
+    print("수집 데이터: ", len(df))
+
+    # 2. 데이터 전처리
+    processed_df = transform_train_data(df)
+    print("전처리 데이터: ", len(processed_df))
+
+    # 3. 배차 간격 분석
+    headway_df = calculate_headway(processed_df)
+    print("배차 분석 데이터: ", len(headway_df))
+
+    # 4. PostgreSQL 저장
+    save_data(processed_df)
+    save_headway_data(headway_df)
+    print("Realtime ETL 완료")
 
 with DAG(
     dag_id = "subway_realtime_etl",

@@ -9,6 +9,16 @@ def calculate_passenger_congestion(df):
         df["GTOFF_TNOPE"]
     )
 
+    # 승객 기반 혼잡 점수
+    df['CONGESTION_SCORE'] =(
+        df['TOTAL_PASSENGERS'] / 1000
+    )
+
+    # 환승 병목 점수
+    df['TRANSFER_SCORE'] = (
+        df['GTON_TNOPE'] * df['GTOFF_TNOPE']
+    )
+
     # 혼잡도 등급
     df["CONGESTION_LEVEL"] = pd.cut(
         df["TOTAL_PASSENGERS"],
