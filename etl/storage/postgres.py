@@ -1,7 +1,7 @@
 # postgres.py : PostgreSQL 저장 (Load)
 from sqlalchemy import create_engine
-from etl.common.logger import logger
-from etl.common.config import (
+from common.logger import logger
+from common.config import (
     POSTGRES_CONFIG,
     REALTIME_TABLE_NAME,
     HEADWAY_TABLE_NAME,
