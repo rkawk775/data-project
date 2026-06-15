@@ -1,9 +1,9 @@
 # subway_passenger_dag.py
-# 승하차 수집 → 승하차 전처리 → 혼잡도 수집 → 혼잡도 전처리 → JOIN → 병목 분석 → PostgreSQL 저장
-
+# 승하차 수집 → 전처리 → 혼잡도 계산 → PostgreSQL 저장
 from datetime import datetime
 from airflow import DAG
 from airflow.operators.python import PythonOperator
+import pandas as pd
 from etl.ingestion import fetch_subway_data
 from etl.processing import (
     transform_subway_data,
@@ -12,24 +12,49 @@ from etl.processing import (
 from etl.storage import save_passenger_data
 
 
-def run_passenger_etl():
-    print("Passenger ETL Start")
 
-    # 1. API 수집
+# Task 1 : API 수집
+
+def fetch_passenger_task():
+
+    print("Passenger Fetch Start")
+
     df = fetch_subway_data()
-    print("수집 데이터: ", len(df))
+    print("수집 데이터:", len(df))
 
-    # 2. 전처리
+    return df.to_json()
+
+
+
+# Task 2 : Transform
+def transform_passenger_task(ti):
+
+    print("Passenger Transform Start")
+
+    data = ti.xcom_pull( task_ids="fetch_passenger_data")
+    df = pd.read_json(data)
     df = transform_subway_data(df)
-    print("전처리 데이터: ", len(df))
-
-    # 3. 혼잡 분석 컬럼 생성
     df = calculate_passenger_congestion(df)
-    print(df.head())
 
-    # 4. PostgreSQL 생성
+    print("전처리 데이터:", len(df))
+
+    return df.to_json()
+
+
+
+# Task 3 : Load
+def load_passenger_task(ti):
+
+    print("Passenger Load Start")
+
+    data = ti.xcom_pull( task_ids="transform_passenger_data" )
+    df = pd.read_json(data)
     save_passenger_data(df)
+
+
     print("Passenger ETL 완료")
+
+
 
 with DAG(
     dag_id="subway_passenger_etl",
@@ -39,7 +64,20 @@ with DAG(
     tags=["subway","passenger"]
 ) as dag:
     
-    passenger_task = PythonOperator(
-        task_id="run_passenger_etl",
-        python_callable=run_passenger_etl
+
+    fetch_task = PythonOperator(
+        task_id="fetch_passenger_data",
+        python_callable=fetch_passenger_task
     )
+
+    transform_task = PythonOperator(
+        task_id="transform_passenger_data",
+        python_callable=transform_passenger_task
+    )
+
+    load_task = PythonOperator(
+        task_id="load_passenger_data",
+        python_callable=load_passenger_task
+    )
+
+    fetch_task >> transform_task >> load_task

@@ -1,9 +1,9 @@
-# subway_realtime_dag.py 
-# 실시간 열차 수집 → 전처리 → 배차간격 계산 → PostgreSQL 저장
-
+# subway_realtime_dag.py
+# 실시간 열차 수집 → 전처리 → 분석 → 저장
 from datetime import datetime
 from airflow import DAG
 from airflow.operators.python import PythonOperator
+import pandas as pd
 from etl.ingestion import fetch_realtime_train_data
 from etl.processing import (
     transform_train_data,
@@ -17,39 +17,78 @@ from etl.storage import (
 )
 
 
-def run_realtime_etl():
-    
-    # 1. API 수집
+# Task 1 : API 수집
+def fetch_realtime_task():
+
+    print("Realtime Fetch Start")
+
     df = fetch_realtime_train_data()
-    print("수집 데이터: ", len(df))
 
-    # 2. 데이터 전처리
+    print("수집 데이터:", len(df))
+
+    return df.to_json()
+
+
+# Task 2 : Transform + 분석
+def transform_realtime_task(ti):
+
+    print("Realtime Transform Start")
+
+    data = ti.xcom_pull( task_ids="fetch_realtime_data" )
+
+    df = pd.read_json(data)
+
     processed_df = transform_train_data(df)
-    print("전처리 데이터: ", len(processed_df))
-
-    # 3. 배차 간격 분석
     headway_df = calculate_headway(processed_df)
-    print("배차 분석 데이터: ", len(headway_df))
+    density_df = cacluate_train_density(processed_df)
 
-    # 4. 열차 간 밀집도 분석
-    density_df = cacluate_train_density(df)
-    print("배차 분석 데이터: ", len(density_df))
+    return {
+        "processed": processed_df.to_json(),
+        "headway": headway_df.to_json(),
+        "density": density_df.to_json()
+    }
 
-    # 5. PostgreSQL 저장
+
+# Task 3 : Load
+def load_realtime_task(ti):
+
+    print("Realtime Load Start")
+
+    result = ti.xcom_pull(task_ids="transform_realtime_data")
+    processed_df = pd.read_json( result["processed"])
+    headway_df = pd.read_json( result["headway"] )
+    density_df = pd.read_json( result["density"])
+
     save_data(processed_df)
     save_headway_data(headway_df)
     save_density_data(density_df)
+
     print("Realtime ETL 완료")
 
+
+
 with DAG(
-    dag_id = "subway_realtime_etl",
+    dag_id="subway_realtime_etl",
     start_date=datetime(2026,6,1),
     schedule="@hourly",
     catchup=False,
     tags=["subway","realtime"]
 ) as dag:
-    
-    realtime_task = PythonOperator(
-        task_id="run_realtime_etl",
-        python_callable=run_realtime_etl
+
+
+    fetch_task = PythonOperator(
+        task_id="fetch_realtime_data",
+        python_callable=fetch_realtime_task
     )
+
+    transform_task = PythonOperator(
+        task_id="transform_realtime_data",
+        python_callable=transform_realtime_task
+    )
+
+    load_task = PythonOperator(
+        task_id="load_realtime_data",
+        python_callable=load_realtime_task
+    )
+
+    fetch_task >> transform_task >> load_task
