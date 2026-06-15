@@ -29,3 +29,7 @@ from .congestion_transform import (
     calculate_max_congestion,
     calculate_peak_time
 )
+
+from .train_denstity import (
+    cacluate_train_density
+)

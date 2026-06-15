@@ -7,7 +7,8 @@ from common.config import (
     HEADWAY_TABLE_NAME,
     PASSENGER_TABLE_NAME,
     CONGESTION_TABLE_NAME,
-    BOTTLENECK_TABLE_NAME
+    BOTTLENECK_TABLE_NAME,
+    DENSITY_TABLE_NAME
 )
 
 DATABASE_URL = (
@@ -80,6 +81,20 @@ def save_bottleneck_data(df):
         index=False
     )
     logger.info("PostgreSQL 저장 완료 : 병목 분석 결과")
+
+
+# 열차 밀집도 분석 결과 저장
+# 열차 밀집도 분석 결과 저장
+def save_density_data(df):
+
+    df.to_sql(
+        name=DENSITY_TABLE_NAME,
+        con=engine,
+        if_exists="replace",
+        index=False
+    )
+
+    logger.info("PostgreSQL 저장 완료 : 열차 밀집도 분석 결과")
 
 
 # ===================================================

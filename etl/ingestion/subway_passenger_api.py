@@ -1,7 +1,7 @@
 # 호선/역별 승하차 인원 정보 : API 호출 (Extract)
 import requests
 import pandas as pd
-from etl.common.config import (
+from common.config import (
     PASSENGER_API_KEY,
     PASSENGER_DATE,
     TARGET_LINE

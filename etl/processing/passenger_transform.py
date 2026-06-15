@@ -1,5 +1,5 @@
 # 호선/역별 승하차 인원 : 데이터 타입 정리 담당
-from etl.common.config import TARGET_LINE
+from common.config import TARGET_LINE
 
 def transform_subway_data(df):
 

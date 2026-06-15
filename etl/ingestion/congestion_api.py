@@ -1,7 +1,7 @@
 # 지하철 혼잡도 정보
 import requests
 import pandas as pd
-from etl.common.config import(
+from common.config import(
     CONGESTION_API_KEY
 )
 

@@ -7,11 +7,13 @@ from airflow.operators.python import PythonOperator
 from etl.ingestion import fetch_realtime_train_data
 from etl.processing import (
     transform_train_data,
-    calculate_headway
+    calculate_headway,
+    cacluate_train_density
 )
 from etl.storage import (
     save_data,
-    save_headway_data
+    save_headway_data,
+    save_density_data
 )
 
 
@@ -29,9 +31,14 @@ def run_realtime_etl():
     headway_df = calculate_headway(processed_df)
     print("배차 분석 데이터: ", len(headway_df))
 
-    # 4. PostgreSQL 저장
+    # 4. 열차 간 밀집도 분석
+    density_df = cacluate_train_density(df)
+    print("배차 분석 데이터: ", len(density_df))
+
+    # 5. PostgreSQL 저장
     save_data(processed_df)
     save_headway_data(headway_df)
+    save_density_data(density_df)
     print("Realtime ETL 완료")
 
 with DAG(

@@ -4,5 +4,6 @@ from .postgres import (
     save_headway_data,
     save_passenger_data,
     save_congestion_data,
-    save_bottleneck_data
+    save_bottleneck_data,
+    save_density_data
 )

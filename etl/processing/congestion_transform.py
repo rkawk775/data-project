@@ -1,5 +1,5 @@
 # 혼잡도 API 전처리
-from etl.common.config import TARGET_LINE
+from common.config import TARGET_LINE
 
 # 특정 호선만 추출
 def filter_line(df):
