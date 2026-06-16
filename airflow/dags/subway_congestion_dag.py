@@ -12,30 +12,52 @@ from etl.processing import (
 )
 from etl.storage import save_congestion_data
 
-def run_congestion_etl():
-    print("Congestion ETL Start")
 
-    # 1. API 수집
+# Task 1. API 수집
+def fetch_congestion_task():
+    
     df = fetch_congestion_data()
-    print("수집 데이터: ", len(df))
+    
+    print("혼잡도 수집 데이터: ", len(df))
 
-    # 2. 특정 호선 필터
+    return df.to_json()
+
+
+# Task 2. 전처리
+def transform_congestion_task(ti):
+    import pandas as pd
+
+    data = ti.xcom_pull(task_ids="fetch_congestion_data")
+
+    df = pd.read_json(data)
+
+    # 1. 특정 호선 필터
     df = filter_line(df)
-    print("호선 필터 후 : ",len(df))
 
-    # 3. 평일 데이터만 추출
+    # 2. 평일 필터
     df = filter_weekday(df)
-    print("평일 필터 후: ", len(df))
 
-    # 4. 최대 혼잡도 계산
+    # 3. 최대 혼잡도 계산
     df = calculate_max_congestion(df)
 
-    # 5. 최대 혼잡 시간 계산
+    # 4. 최대 혼잡 시간 계산
     df = calculate_peak_time(df)
+
     print(df.head())
 
-    # 6. PostgreSQL 저장
+    return df.to_json()
+
+
+# Task 3. DB 저장
+def load_congestion_task(ti):
+    import pandas as pd
+    
+    data = ti.xcom_pull(task_ids="transform_congestion_data")
+    
+    df = pd.read_json(data)
+
     save_congestion_data(df)
+
     print("Congestion ETL Complete")
 
 
@@ -44,13 +66,22 @@ with DAG(
     start_date=datetime(2026,6,1),
     schedule="@daily",
     catchup=False,
-    tags=[
-        "subway",
-        "congestion"
-    ]
+    tags=[ "subway","congestion"]
 ) as dag:
     
-    congetion_task = PythonOperator(
-        task_id="run_congestion_etl",
-        python_callable=run_congestion_etl
+    fetch_congestion_data_task = PythonOperator(
+        task_id = "fetch_congestion_data",
+        python_callable=fetch_congestion_task
     )
+
+    transform_congestion_data_task = PythonOperator(
+        task_id = "transform_congestion_data",
+        python_callable=transform_congestion_task
+    )
+
+    load_congestion_data_task = PythonOperator(
+        task_id = "load_congestion_data",
+        python_callable=load_congestion_task
+    )
+
+    fetch_congestion_data_task >> transform_congestion_data_task >> load_congestion_data_task

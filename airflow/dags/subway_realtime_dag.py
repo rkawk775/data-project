@@ -51,13 +51,19 @@ def transform_realtime_task(ti):
 
 # Task 3 : Load
 def load_realtime_task(ti):
-
     print("Realtime Load Start")
 
     result = ti.xcom_pull(task_ids="transform_realtime_data")
-    processed_df = pd.read_json( result["processed"])
-    headway_df = pd.read_json( result["headway"] )
-    density_df = pd.read_json( result["density"])
+    
+    processed_df = pd.read_json(result["processed"])
+    headway_df = pd.read_json(result["headway"])
+    density_df = pd.read_json(result["density"])
+
+    # XCom 직렬화로 인해 datetime이 밀리초 int로 변환됨 → 재변환 필요
+    processed_df["recptnDt"] = pd.to_datetime(processed_df["recptnDt"])
+    headway_df["recptnDt"] = pd.to_datetime(headway_df["recptnDt"])
+    headway_df["previous_time"] = pd.to_datetime(headway_df["previous_time"])
+    density_df["recptnDt"] = pd.to_datetime(density_df["recptnDt"])
 
     save_data(processed_df)
     save_headway_data(headway_df)
