@@ -3,16 +3,15 @@ import requests
 import pandas as pd
 from common.config import (
     PASSENGER_API_KEY,
-    PASSENGER_DATE,
     TARGET_LINE
     )
 
 
-def fetch_subway_data():
+def fetch_subway_data(date):
     url = (
         f"http://openapi.seoul.go.kr:8088/"
         f"{PASSENGER_API_KEY}/json/"
-        f"CardSubwayStatsNew/1/100/{PASSENGER_DATE}/{TARGET_LINE}"
+        f"CardSubwayStatsNew/1/100/{date}/{TARGET_LINE}"
     )
 
     response = requests.get(url)

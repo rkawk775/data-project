@@ -10,20 +10,27 @@ from etl.processing import (
     calculate_passenger_congestion
 )
 from etl.storage import save_passenger_data
+from datetime import timedelta
 
 
 
 # Task 1 : API 수집
-
-def fetch_passenger_task():
+def fetch_passenger_task(**context):
 
     print("Passenger Fetch Start")
 
-    df = fetch_subway_data()
+    execution_date = (
+        context["logical_date"]
+        - timedelta(days=2)
+    ).strftime("%Y%m%d")
+
+    print("조회 날짜:", execution_date)
+
+    df = fetch_subway_data(execution_date)
+
     print("수집 데이터:", len(df))
 
     return df.to_json()
-
 
 
 # Task 2 : Transform

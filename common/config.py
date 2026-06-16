@@ -21,8 +21,8 @@ CONGESTION_API_KEY =os.getenv("CONGESTION_API_KEY")
 
 # 노선 설정
 TARGET_LINE = "1호선"
-# [승하차] 수집 날짜 설정
-PASSENGER_DATE = "20260508"
+# [승하차] 수집 날짜 설정는 Ariflow 실행 날짜 기준으로 동적 처리
+# PASSENGER_DATE = "20260508"
 
 # PostgreSQL 설정
 POSTGRES_CONFIG = {
