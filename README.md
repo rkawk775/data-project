@@ -36,20 +36,10 @@ DBeaver
 
 ## DAG Structure
 
-subway_passenger_etl
-(fetch)
- →
-(transform)
- →
-(load)
+<div align="center">
+  <img width="70%" alt="DAG Structure" src="https://github.com/user-attachments/assets/109b4783-0123-4b2e-a676-6f808dc35a10" />
+</div>
 
-
-subway_realtime_etl
-(fetch)
- →
-(transform)
- →
-(load)
 
 | DAG                     | 데이터 기준                 | 역할                               | 분석 의미                                    | 실행 주기  |
 | ----------------------- | ---------------------- | -------------------------------- | ---------------------------------------- | ------ |
