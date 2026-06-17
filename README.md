@@ -1,6 +1,8 @@
-# Subway ETL Pipeline
+### 🚋 Subway Congestion Analytics Pipeline
 
-## 프로젝트 소개
+---
+
+### 프로젝트 소개
 
 본 프로젝트는 출퇴근 시간대 지하철 혼잡 및 배차 문제를 데이터 기반으로 분석하기 위해 수행한 데이터 엔지니어링 프로젝트입니다.
 
@@ -12,7 +14,7 @@
 
 최종적으로 본 프로젝트는 단순한 혼잡 현상 조회를 넘어, **"왜 특정 시간과 구간에서 혼잡이 발생하는가"를 설명할 수 있는 데이터 구조를 구축** 하는 것을 목표로 합니다.
 
-
+<br>
 
 ## Architecture
 <div align="center">
@@ -61,7 +63,7 @@ DBeaver
 
 
 
-## Database Tables
+## Database Tables (:DataSchema 필요)
 
 subway_passenger
 
@@ -80,7 +82,5 @@ subway_congestion
 - 수집 데이터 건수 검증
 - API 응답 실패 처리
 
-
-## 실행 방법
 
 ## 프로젝트 결과/회고
