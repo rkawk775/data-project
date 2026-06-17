@@ -3,9 +3,9 @@
 ## 프로젝트 소개
 
 ## Architecture
-             Airflow
-                |
-API → ETL Pipeline → PostgreSQL
+<div align="Architecture">
+  <img width="50%" alt="PipeLine Architecture" src="https://github.com/user-attachments/assets/bf6165c7-e93a-4c36-adb0-8a52742f8178" />
+</div>
 
 
 ## Data Pipeline
