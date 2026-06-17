@@ -3,13 +3,9 @@
 ## 프로젝트 소개
 
 ## Architecture
-API
- ↓
-Airflow
- ↓
-ETL
- ↓
-PostgreSQL
+             Airflow
+                |
+API → ETL Pipeline → PostgreSQL
 
 
 ## Data Pipeline
@@ -67,3 +63,20 @@ train_headway
 train_density
 
 subway_congestion
+
+## Data Quality Check
+
+- NULL 데이터 검증
+- 중복 데이터 제거
+- 수집 데이터 건수 검증
+- API 응답 실패 처리
+
+## Scheduling
+
+- Passenger ETL : Daily
+- Realtime ETL : Interval
+- Congestion ETL : Daily
+
+## 실행 방법
+
+## 프로젝트 결과/회고
