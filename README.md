@@ -14,7 +14,9 @@
 
 최종적으로 본 프로젝트는 단순한 혼잡 현상 조회를 넘어, **"왜 특정 시간과 구간에서 혼잡이 발생하는가"를 설명할 수 있는 데이터 구조를 구축** 하는 것을 목표로 합니다.
 
-<br>
+
+## 프로젝트 목표
+
 
 ## Architecture
 <div align="center">
@@ -63,7 +65,7 @@ DBeaver
 
 
 
-## Database Tables (:DataSchema 필요)
+## Database Schema
 
 subway_passenger
 
@@ -82,5 +84,6 @@ subway_congestion
 - 수집 데이터 건수 검증
 - API 응답 실패 처리
 
+## Troubleshooting
 
-## 프로젝트 결과/회고
+## 프로젝트 결과 및 회고
