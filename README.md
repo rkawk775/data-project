@@ -4,7 +4,7 @@
 
 ## Architecture
 <div align="center">
-  <img width="50%" alt="PipeLine Architecture" src="https://github.com/user-attachments/assets/bf6165c7-e93a-4c36-adb0-8a52742f8178" />
+  <img width="70%" alt="PipeLine Architecture" src="https://github.com/user-attachments/assets/bf6165c7-e93a-4c36-adb0-8a52742f8178" />
 </div>
 
 
@@ -37,7 +37,7 @@ DBeaver
 ## DAG Structure
 
 <div align="center">
-  <img width="70%" alt="DAG Structure" src="https://github.com/user-attachments/assets/109b4783-0123-4b2e-a676-6f808dc35a10" />
+  <img width="80%" alt="DAG Structure" src="https://github.com/user-attachments/assets/109b4783-0123-4b2e-a676-6f808dc35a10" />
 </div>
 
 
@@ -68,11 +68,6 @@ subway_congestion
 - 수집 데이터 건수 검증
 - API 응답 실패 처리
 
-## Scheduling
-
-- Passenger ETL : Daily
-- Realtime ETL : Interval
-- Congestion ETL : Daily
 
 ## 실행 방법
 
