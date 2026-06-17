@@ -3,7 +3,7 @@
 ## 프로젝트 소개
 
 ## Architecture
-<div align="Architecture">
+<div align="center">
   <img width="50%" alt="PipeLine Architecture" src="https://github.com/user-attachments/assets/bf6165c7-e93a-4c36-adb0-8a52742f8178" />
 </div>
 
@@ -50,6 +50,13 @@ subway_realtime_etl
 (transform)
  →
 (load)
+
+| DAG                     | 데이터 기준                 | 역할                               | 분석 의미                                    | 실행 주기  |
+| ----------------------- | ---------------------- | -------------------------------- | ---------------------------------------- | ------ |
+| `subway_passenger_etl`  | 서울 열린데이터 승하차 인원 API    | 승하차 데이터 수집 및 이용량 분석              | **사람 수 기준 혼잡도** (어느 역에 승객이 많이 몰리는지 분석)   | Daily  |
+| `subway_realtime_etl`   | 서울 열린데이터 실시간 열차 위치 API | 실시간 열차 위치 수집, 배차간격 계산, 열차 밀집도 분석 | **운행 상태 기반 분석** (열차 간격 및 특정 구간 밀집 여부 확인) | Hourly |
+| `subway_congestion_etl` | 서울 열린데이터 혼잡도 API       | 혼잡도 데이터 수집 및 시간대 분석              | **시간대별 혼잡률/혼잡 구간 분석** (언제 가장 붐비는지 분석)    | Daily  |
+
 
 
 ## Database Tables
