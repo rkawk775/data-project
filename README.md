@@ -36,20 +36,12 @@
 
 
 ## Data Pipeline
+서울 열린데이터 API 데이터를 기반으로 목적별 ETL Pipeline을 구성했습니다.
 
-1. Passenger ETL
-- 승하차 데이터 수집
-- 혼잡도 계산
-- PostgreSQL 저장
+<div align="center">
+  <img width="70%" alt="DataPipeline" src="https://github.com/user-attachments/assets/819e0cf9-39b2-4add-a597-a3bcfb534049" />
+</div>
 
-2. Realtime ETL
-- 실시간 열차 위치 수집
-- 배차 간격 분석
-- 열차 밀집도 분석
-
-3. Congestion ETL
-- 혼잡도 데이터 수집
-- 최대 혼잡 시간 분석
 
 
 ## Tech Stack
