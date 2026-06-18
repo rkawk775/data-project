@@ -37,6 +37,12 @@
 
 ## Data Pipeline
 
+<div align="center">
+  <img width="90%" alt="DataPipeline" src="https://github.com/user-attachments/assets/6c88ae0d-b4e3-415e-a67c-6a16a244fa47" />
+</div>
+
+<br>
+
 서울 열린데이터 API 데이터를 기반으로 분석 목적에 따라 Passenger, Realtime, Congestion ETL Pipeline을 구성했습니다.
 
 각 ETL Pipeline은 **Airflow DAG** 로 관리되며, 데이터 수집 → 전처리 및 분석 → PostgreSQL 적재 과정으로 자동화했습니다.
@@ -44,10 +50,9 @@
 승하차 데이터는 **승객 기반 혼잡도** 를, 실시간 열차 데이터는 **배차 간격 및 열차 밀집도** 를, 혼잡도 데이터는 **시간대별 혼잡 패턴 분석** 을 위해 활용했습니다.
 
 <br>
+<br>
 
-<div align="center">
-  <img width="100%" alt="DataPipeline" src="https://github.com/user-attachments/assets/6c88ae0d-b4e3-415e-a67c-6a16a244fa47" />
-</div>
+
 
 
 
