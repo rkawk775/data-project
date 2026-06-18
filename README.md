@@ -66,11 +66,17 @@
 
 ## 🛠️ Tech Stack
 
-Python
-Apache Airflow
-PostgreSQL
-Docker
-DBeaver
+
+**Data Engineering:**  <img src="https://img.shields.io/badge/Python-3776AB?style=for-the-badge&logo=python&logoColor=white">
+<img src="https://img.shields.io/badge/Apache%20Airflow-017CEE?style=for-the-badge&logo=apacheairflow&logoColor=white">
+<img src="https://img.shields.io/badge/PostgreSQL-4169E1?style=for-the-badge&logo=postgresql&logoColor=white">
+
+**Infrastructure:** <img src="https://img.shields.io/badge/Docker-2496ED?style=for-the-badge&logo=docker&logoColor=white">
+
+**Database Tool:** <img src="https://img.shields.io/badge/DBeaver-382923?style=for-the-badge&logo=dbeaver&logoColor=white">
+
+**Version Control:** <img src="https://img.shields.io/badge/Git-F05032?style=for-the-badge&logo=git&logoColor=white">
+
 
 <br>
 
@@ -79,6 +85,7 @@ DBeaver
 <div align="center">
   <img width="80%" alt="DAG Structure" src="https://github.com/user-attachments/assets/109b4783-0123-4b2e-a676-6f808dc35a10" />
 </div>
+
 
 
 | DAG                     | 데이터 기준                 | 역할                               | 분석 의미                                    | 실행 주기  |
