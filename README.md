@@ -39,7 +39,7 @@
 서울 열린데이터 API 데이터를 기반으로 목적별 ETL Pipeline을 구성했습니다.
 
 <div align="center">
-  <img width="70%" alt="DataPipeline" src="https://github.com/user-attachments/assets/819e0cf9-39b2-4add-a597-a3bcfb534049" />
+  <img width="70%" alt="DataPipeline" src="https://github.com/user-attachments/assets/6c88ae0d-b4e3-415e-a67c-6a16a244fa47" />
 </div>
 
 
