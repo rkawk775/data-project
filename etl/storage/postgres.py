@@ -84,7 +84,6 @@ def save_bottleneck_data(df):
 
 
 # 열차 밀집도 분석 결과 저장
-# 열차 밀집도 분석 결과 저장
 def save_density_data(df):
 
     df.to_sql(

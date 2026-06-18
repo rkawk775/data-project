@@ -11,58 +11,93 @@ from etl.processing import (
     calculate_peak_time
 )
 from etl.storage import save_congestion_data
+from datetime import timedelta
+from common.logger import logger
 
 
 # Task 1. API 수집
 def fetch_congestion_task():
-    
-    df = fetch_congestion_data()
-    
-    print("혼잡도 수집 데이터: ", len(df))
+    try:
+        df = fetch_congestion_data()
 
-    return df.to_json()
+        if df.empty:
+            raise ValueError("Congestion API 응답 데이터 없음")
+    
+        logger.info(f"혼잡도 수집 데이터: {len(df)}")
+
+        return df.to_json()
+    
+    except Exception as e:
+        logger.error(f"Congestion Fetch 실패 : {e} ")
+        raise
 
 
 # Task 2. 전처리
 def transform_congestion_task(ti):
     import pandas as pd
 
-    data = ti.xcom_pull(task_ids="fetch_congestion_data")
+    try:
+        data = ti.xcom_pull(task_ids="fetch_congestion_data")
+        if data is Nome:
+            raise ValueError("fetch_congestion_data로부터 데이터 없음 (xcom_pull 결과 None)")
+    
+        df = pd.read_json(data)
+        if df.empty:
+            raise ValueError("JSON 파싱 후 데이터 없음")
 
-    df = pd.read_json(data)
+        # 1. 특정 호선 필터
+        df = filter_line(df)
 
-    # 1. 특정 호선 필터
-    df = filter_line(df)
+        # 2. 평일 필터
+        df = filter_weekday(df)
 
-    # 2. 평일 필터
-    df = filter_weekday(df)
+        # 3. 최대 혼잡도 계산
+        df = calculate_max_congestion(df)
 
-    # 3. 최대 혼잡도 계산
-    df = calculate_max_congestion(df)
+        # 4. 최대 혼잡 시간 계산
+        df = calculate_peak_time(df)
 
-    # 4. 최대 혼잡 시간 계산
-    df = calculate_peak_time(df)
+        logger.info(f"혼잡도 전처리 데이터 : {df.head()}")
 
-    print(df.head())
+        return df.to_json()
 
-    return df.to_json()
+    except Exception as e:
+        logger.error(f"Congestion Transform 실패 : {e}")
+        raise
 
 
 # Task 3. DB 저장
 def load_congestion_task(ti):
     import pandas as pd
     
-    data = ti.xcom_pull(task_ids="transform_congestion_data")
-    
-    df = pd.read_json(data)
+    try:
+        data = ti.xcom_pull(task_ids="transform_congestion_data")
+        if data is None:
+            raise ValueError("transform_congestion_data로부터 데이터 없음 (xcom_pull 결과 None)")
+        
+        df = pd.read_json(data)
+        if df.empty:
+            raise ValueError("JSON 파싱 후 데이터 없음")
 
-    save_congestion_data(df)
+        save_congestion_data(df)
 
-    print("Congestion ETL Complete")
+        logger.info("Congestion ETL Complete")
+
+    except Exception as e:
+        logger.error(f"Congesetion Load 실패 : {e}")
+        raise
+
+
+default_args = {
+    "owner" : "airflow",
+    "retries" : 3,
+    "retry_delay" : timedelta(minutes=5)
+} 
 
 
 with DAG(
     dag_id="subway_congestion_etl",
+    default_args=default_args,
     start_date=datetime(2026,6,1),
     schedule="@daily",
     catchup=False,
