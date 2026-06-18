@@ -96,7 +96,7 @@
 
 
 
-## Database Schema
+## Database Schema (-- 여기서부터 재수정)
 
 subway_passenger
 
