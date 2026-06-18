@@ -29,19 +29,13 @@
 
 <br>
 
-## Architecture
+## 📋 Architecture
 <div align="center">
   <img width="70%" alt="PipeLine Architecture" src="https://github.com/user-attachments/assets/bf6165c7-e93a-4c36-adb0-8a52742f8178" />
 </div>
 
 
-## Data Pipeline
-
-<div align="center">
-  <img width="90%" alt="DataPipeline" src="https://github.com/user-attachments/assets/6c88ae0d-b4e3-415e-a67c-6a16a244fa47" />
-</div>
-
-<br>
+## ⚙️Data Pipeline
 
 서울 열린데이터 API 데이터를 기반으로 분석 목적에 따라 Passenger, Realtime, Congestion ETL Pipeline을 구성했습니다.
 
@@ -49,16 +43,28 @@
 
 승하차 데이터는 **승객 기반 혼잡도** 를, 실시간 열차 데이터는 **배차 간격 및 열차 밀집도** 를, 혼잡도 데이터는 **시간대별 혼잡 패턴 분석** 을 위해 활용했습니다.
 
+이를 통해 승객 흐름, 열차 운행 상태, 시간대별 혼잡 데이터를 분리 구축하고, 혼잡 발생 원인을 분석할 수 있는 데이터 구조를 구성했습니다.
+
 <br>
 <br>
 
+<div align="center">
+  <img width="90%" alt="DataPipeline" src="https://github.com/user-attachments/assets/6c88ae0d-b4e3-415e-a67c-6a16a244fa47" />
+</div>
+
+<br>
 
 
 
 
 
 
-## Tech Stack
+
+
+
+
+
+## 🛠️ Tech Stack
 
 Python
 Apache Airflow
@@ -66,6 +72,7 @@ PostgreSQL
 Docker
 DBeaver
 
+<br>
 
 ## DAG Structure
 
