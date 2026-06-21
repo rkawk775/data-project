@@ -56,14 +56,6 @@
 
 
 
-
-
-
-
-
-
-
-
 ## 🛠️ Tech Stack
 
 
@@ -96,17 +88,11 @@
 
 
 
-## Database Schema (-- 여기서부터 재수정)
+## Database Schema 
+<div align="center"
+  <img width="1536" height="1024" alt="DatabaseSchema" src="https://github.com/user-attachments/assets/60000f34-b799-48ec-9b7c-8eb5eb6d730a" />
+</div>
 
-subway_passenger
-
-realtime_train_location
-
-train_headway
-
-train_density
-
-subway_congestion
 
 ## Data Quality Check
 
