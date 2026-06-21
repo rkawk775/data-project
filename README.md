@@ -89,7 +89,7 @@
 
 
 ## Database Schema 
-<div align="center"
+<div align="center">
   <img width="1536" height="1024" alt="DatabaseSchema" src="https://github.com/user-attachments/assets/60000f34-b799-48ec-9b7c-8eb5eb6d730a" />
 </div>
 
