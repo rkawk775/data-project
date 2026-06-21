@@ -2,6 +2,9 @@
 import pandas as pd
 
 def transform_train_data(df):
+    
+    # 방향명 컬럼 추가
+    df["direction"] = df["updnLine"].map({ 0:"상행", 1:"하행" })
 
     selected_df = df[
         [
@@ -15,6 +18,7 @@ def transform_train_data(df):
             "recptnDt",     #현재 데이터 수집 시각
             "lastRecptnDt", #이전 수신 시각
             "directAt",     #급행 여부
+            "direction",    #방향명 (상행/하행)
         ]
     ]
 

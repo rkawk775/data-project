@@ -12,7 +12,7 @@ TIMEOUT = 10
 MAX_RETRIES = 3
 
 def fetch_realtime_train_data():
-    url = f"{BASE_URL}/{LOCATION_API_KEY}/json/realtimePosition/0/5/{TARGET_LINE}"
+    url = f"{BASE_URL}/{LOCATION_API_KEY}/json/realtimePosition/0/500/{TARGET_LINE}"
 
     for attempt in range(1, MAX_RETRIES + 1):
         try:
