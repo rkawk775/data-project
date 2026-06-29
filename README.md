@@ -128,12 +128,12 @@ Headway 테이블 생성 과정에서 previous_time, HEADWAY_SECONDS 컬럼에 N
 
 
 https://github.com/user-attachments/assets/f45d8c7a-1016-44f0-b36c-a368931e7fed
-
+<br>
 공공 API 기반 실시간 지하철 데이터를 활용하여 데이터 수집부터 전처리, 적재, 자동화까지 전체 ETL Pipeline 구축 과정을 경험했습니다. 
-<br>
+<br><br>
 Python 기반 데이터 수집 및 변환 로직 구현, PostgreSQL 적재, Airflow DAG 자동화를 통해 반복적인 데이터 처리 과정을 자동화했으며, Data Quality Check와 Troubleshooting 과정을 통해 안정적인 데이터 환경 구축과 데이터 정합성 관리의 중요성을 경험했습니다.
-<br>
+<br><br>
 이번 프로젝트를 통해 데이터 엔지니어링은 단순히 데이터를 저장하는 것이 아니라, 활용 목적에 맞게 데이터를 가공하고 신뢰성 있는 형태로 제공하는 과정이라는 점을 배웠습니다. 또한 데이터의 단순한 수집보다 실제 활용 과정에서 발생할 수 있는 품질 문제를 관리하고, 목적에 맞는 데이터 구조를 구성하는 것이 중요하다는 것을 깨달았습니다.
-<br>
+<br><br>
 향후에는 Kafka 기반 실시간 데이터 스트리밍 환경과 Cloud 인프라를 활용한 분산 처리 구조를 적용하여, 대용량 데이터 처리와 실무 환경에 가까운 확장 가능한 데이터 Pipeline 구축 경험을 쌓고자 합니다.
 <br>
