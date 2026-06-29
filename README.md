@@ -128,6 +128,7 @@ Headway 테이블 생성 과정에서 previous_time, HEADWAY_SECONDS 컬럼에 N
 
 
 https://github.com/user-attachments/assets/f45d8c7a-1016-44f0-b36c-a368931e7fed
+
 <br>
 공공 API 기반 실시간 지하철 데이터를 활용하여 데이터 수집부터 전처리, 적재, 자동화까지 전체 ETL Pipeline 구축 과정을 경험했습니다. 
 <br><br>
