@@ -2,6 +2,7 @@
 
 ---
 
+
 ### 프로젝트 소개
 
 본 프로젝트는 출퇴근 시간대 발생하는 지하철 혼잡 및 배차 문제를 데이터 기반으로 분석하기 위해 구축한 데이터 엔지니어링 프로젝트입니다.
@@ -130,6 +131,11 @@ Headway 테이블 생성 과정에서 previous_time, HEADWAY_SECONDS 컬럼에 N
 https://github.com/user-attachments/assets/f45d8c7a-1016-44f0-b36c-a368931e7fed
 
 <br>
+
+**📑 PPT 바로보기 :**
+ [PPT_지하철혼잡도파이프라인](https://github.com/rkawk775/data-project/blob/main/PPT_%EC%A7%80%ED%95%98%EC%B2%A0%ED%98%BC%EC%9E%A1%EB%8F%84%ED%8C%8C%EC%9D%B4%ED%94%84%EB%9D%BC%EC%9D%B8.pdf) <br> <br>
+
+
 공공 API 기반 실시간 지하철 데이터를 활용하여 데이터 수집부터 전처리, 적재, 자동화까지 전체 ETL Pipeline 구축 과정을 경험했습니다. 
 <br><br>
 Python 기반 데이터 수집 및 변환 로직 구현, PostgreSQL 적재, Airflow DAG 자동화를 통해 반복적인 데이터 처리 과정을 자동화했으며, Data Quality Check와 Troubleshooting 과정을 통해 안정적인 데이터 환경 구축과 데이터 정합성 관리의 중요성을 경험했습니다.
